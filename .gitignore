@@ -1,2 +1,12 @@
+# virtual environment
+/venv
+
+# Кэш Python
+__pycache__/
+*.pyc
+
 # JetBrains IDE
 /.idea
+
+# generated files
+/database

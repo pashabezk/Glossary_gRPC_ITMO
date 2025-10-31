@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package glossary;
+
+// Пустое сообщение, используется для запросов, не требующих параметров
+message Empty {}
+
+// Представление одного термина в глоссарии
+message Term {
+	string term = 1;
+	string definition = 2;
+}
+
+// Запрос на получение/удаление термина по его названию
+message TermRequest {
+	string term = 1;
+}
+
+// Запрос на добавление нового термина
+message AddTermRequest {
+	string term = 1;
+	string definition = 2;
+}
+
+// Запрос на обновление существующего термина
+message UpdateTermRequest {
+	string term = 1;
+	string new_definition = 2;
+}
+
+// Ответ, содержащий список всех терминов
+message TermList {
+	repeated Term terms = 1;
+}
+
+// Сервис "Glossary" и его методы (RPCs)
+service GlossaryService {
+	// Получить список всех терминов
+	rpc ListTerms(Empty) returns (TermList);
+
+	// Получить конкретный термин
+	rpc GetTerm(TermRequest) returns (Term);
+
+	// Добавить новый термин
+	rpc AddTerm(AddTermRequest) returns (Term);
+
+	// Обновить существующий термин
+	rpc UpdateTerm(UpdateTermRequest) returns (Term);
+
+	// Удалить термин
+	rpc DeleteTerm(TermRequest) returns (Empty);
+}
